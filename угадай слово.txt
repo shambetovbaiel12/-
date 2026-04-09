@@ -1,0 +1,43 @@
+import random
+
+words = ["яблоко", "машина", "программа", "ТалантАгай", "Жантай"]
+
+word = random.choice(words)
+guessed = []
+
+lives = 6
+
+print("Игра: Угадай слово!")
+print("Слово состоит из", len(word), "букв")
+
+while lives > 0:
+    display = ""
+
+    for letter in word:
+        if letter in guessed:
+            display += letter + " "
+        else:
+            display += "_ "
+
+    print("\nСлово:", display)
+
+    if "_" not in display:
+        print("Ты выиграл!")
+        break
+
+    guess = input("Введи букву: ").lower()
+
+    if guess in guessed:
+        print("Ты уже вводил эту букву")
+        continue
+
+    guessed.append(guess)
+
+    if guess not in word:
+        lives -= 1
+        print("Неправильно! Осталось жизней:", lives)
+    else:
+        print("Есть такая буква!")
+
+if lives == 0:
+    print("Ты проиграл. Слово было:", word)
